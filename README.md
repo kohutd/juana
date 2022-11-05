@@ -47,7 +47,7 @@ console.log(result);
 ## API
 
 ```javascript
-rpc.variables // list of top lever variables (name, version etc.)
+rpc.variables // list of top level variables (name, version etc.)
 rpc.types // list of types
 rpc.methods // list of methods
 rpc.directives // list of directives
