@@ -29,7 +29,7 @@ ID: ID_START (ID_CONTINUE)*;
 STRING: '"' ANY*? '"';
 NUMBER: '-'? NUMBER_START (NUMBER_CONTINUE)*;
 
-document: (variable | directive | data | method)* EOF;
+document: (variable | directive | type | method)* EOF;
 
 id: ID;
 string: STRING;
@@ -38,11 +38,11 @@ number: NUMBER;
 variable: name=id '=' value=variable_value ';';
 variable_value: string | number;
 
-parameter: (deprecated='deprecated')? name=id (optional='?')? ':' type=parameter_type;
+parameter: (deprecated='deprecated')? name=id (optional='?')? ':' ptype=parameter_type;
 parameter_type: id ('|' id)*;
 
-data: (deprecated='deprecated')? name=id '{' parameters=data_parameters? '}';
-data_parameters: (parameter ';')+;
+type: (deprecated='deprecated')? name=id '{' parameters=type_parameters? '}';
+type_parameters: (parameter ';')+;
 
 method: (deprecated='deprecated')? name=id '(' parameters=method_parameters? ')' (':' result=parameter_type)? ';';
 method_parameters: parameter (',' parameter)*;

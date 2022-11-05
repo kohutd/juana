@@ -1,6 +1,6 @@
 import JuanaVisitor from "./antlr4/JuanaVisitor.js";
 import ParameterNode from "./ast/ParameterNode.js";
-import DataNode from "./ast/DataNode.js";
+import TypeNode from "./ast/TypeNode.js";
 import { manyNodes, singleNode } from "../utils/visit.js";
 import MethodNode from "./ast/MethodNode.js";
 import VariableNode from "./ast/VariableNode.js";
@@ -42,18 +42,18 @@ class JuanaVisitorImpl extends JuanaVisitor {
     visitParameter(ctx) {
         const name = this.visit(ctx.name);
         const optional = !!ctx.optional;
-        const type = this.visit(ctx.type);
+        const type = this.visit(ctx.ptype);
         const deprecated = !!ctx.deprecated;
 
         return new ParameterNode(_(ctx), { name, optional, type, deprecated });
     }
 
-    visitData(ctx) {
+    visitType(ctx) {
         const name = this.visit(ctx.name);
         const parameters = ctx.parameters ? this.visit(ctx.parameters) : [];
         const deprecated = !!ctx.deprecated;
 
-        return new DataNode(_(ctx), { name, parameters, deprecated });
+        return new TypeNode(_(ctx), { name, parameters, deprecated });
     }
 
     visitMethod(ctx) {

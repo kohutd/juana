@@ -1,6 +1,6 @@
 import ASTNode from "./ASTNode.js";
 
-class DataNode extends ASTNode {
+class TypeNode extends ASTNode {
     constructor(context, { name, parameters, deprecated }) {
         super(context);
 
@@ -10,4 +10,4 @@ class DataNode extends ASTNode {
     }
 }
 
-export default DataNode;
+export default TypeNode;

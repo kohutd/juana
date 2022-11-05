@@ -45,8 +45,8 @@ variable
 variable_value
 parameter
 parameter_type
-data
-data_parameters
+type
+type_parameters
 method
 method_parameters
 directive

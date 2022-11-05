@@ -77,21 +77,21 @@ export default class JuanaListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by JuanaParser#data.
-	enterData(ctx) {
+	// Enter a parse tree produced by JuanaParser#type.
+	enterType(ctx) {
 	}
 
-	// Exit a parse tree produced by JuanaParser#data.
-	exitData(ctx) {
+	// Exit a parse tree produced by JuanaParser#type.
+	exitType(ctx) {
 	}
 
 
-	// Enter a parse tree produced by JuanaParser#data_parameters.
-	enterData_parameters(ctx) {
+	// Enter a parse tree produced by JuanaParser#type_parameters.
+	enterType_parameters(ctx) {
 	}
 
-	// Exit a parse tree produced by JuanaParser#data_parameters.
-	exitData_parameters(ctx) {
+	// Exit a parse tree produced by JuanaParser#type_parameters.
+	exitType_parameters(ctx) {
 	}
 
 

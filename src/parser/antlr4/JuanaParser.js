@@ -64,7 +64,7 @@ export default class JuanaParser extends antlr4.Parser {
                              "STRING", "NUMBER" ];
     static ruleNames = [ "document", "id", "string", "number", "variable", 
                          "variable_value", "parameter", "parameter_type", 
-                         "data", "data_parameters", "method", "method_parameters", 
+                         "type", "type_parameters", "method", "method_parameters", 
                          "directive", "directive_parameters", "directive_body" ];
 
     constructor(input) {
@@ -107,7 +107,7 @@ export default class JuanaParser extends antlr4.Parser {
 
 	            case 3:
 	                this.state = 32;
-	                this.data();
+	                this.type();
 	                break;
 
 	            case 4:
@@ -299,7 +299,7 @@ export default class JuanaParser extends antlr4.Parser {
 	        this.state = 63;
 	        this.match(JuanaParser.T__4);
 	        this.state = 64;
-	        localctx.type = this.parameter_type();
+	        localctx.ptype = this.parameter_type();
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -352,9 +352,9 @@ export default class JuanaParser extends antlr4.Parser {
 
 
 
-	data() {
-	    let localctx = new DataContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 16, JuanaParser.RULE_data);
+	type() {
+	    let localctx = new TypeContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 16, JuanaParser.RULE_type);
 	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
@@ -375,7 +375,7 @@ export default class JuanaParser extends antlr4.Parser {
 	        _la = this._input.LA(1);
 	        if(_la===3 || _la===14) {
 	            this.state = 79;
-	            localctx.parameters = this.data_parameters();
+	            localctx.parameters = this.type_parameters();
 	        }
 
 	        this.state = 82;
@@ -396,9 +396,9 @@ export default class JuanaParser extends antlr4.Parser {
 
 
 
-	data_parameters() {
-	    let localctx = new Data_parametersContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 18, JuanaParser.RULE_data_parameters);
+	type_parameters() {
+	    let localctx = new Type_parametersContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 18, JuanaParser.RULE_type_parameters);
 	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
@@ -687,8 +687,8 @@ JuanaParser.RULE_variable = 4;
 JuanaParser.RULE_variable_value = 5;
 JuanaParser.RULE_parameter = 6;
 JuanaParser.RULE_parameter_type = 7;
-JuanaParser.RULE_data = 8;
-JuanaParser.RULE_data_parameters = 9;
+JuanaParser.RULE_type = 8;
+JuanaParser.RULE_type_parameters = 9;
 JuanaParser.RULE_method = 10;
 JuanaParser.RULE_method_parameters = 11;
 JuanaParser.RULE_directive = 12;
@@ -735,14 +735,14 @@ class DocumentContext extends antlr4.ParserRuleContext {
 	    }
 	};
 
-	data = function(i) {
+	type = function(i) {
 	    if(i===undefined) {
 	        i = null;
 	    }
 	    if(i===null) {
-	        return this.getTypedRuleContexts(DataContext);
+	        return this.getTypedRuleContexts(TypeContext);
 	    } else {
-	        return this.getTypedRuleContext(DataContext,i);
+	        return this.getTypedRuleContext(TypeContext,i);
 	    }
 	};
 
@@ -1022,7 +1022,7 @@ class ParameterContext extends antlr4.ParserRuleContext {
         this.deprecated = null; // Token
         this.name = null; // IdContext
         this.optional = null; // Token
-        this.type = null; // Parameter_typeContext
+        this.ptype = null; // Parameter_typeContext
     }
 
 	id() {
@@ -1108,7 +1108,7 @@ class Parameter_typeContext extends antlr4.ParserRuleContext {
 
 
 
-class DataContext extends antlr4.ParserRuleContext {
+class TypeContext extends antlr4.ParserRuleContext {
 
     constructor(parser, parent, invokingState) {
         if(parent===undefined) {
@@ -1119,35 +1119,35 @@ class DataContext extends antlr4.ParserRuleContext {
         }
         super(parent, invokingState);
         this.parser = parser;
-        this.ruleIndex = JuanaParser.RULE_data;
+        this.ruleIndex = JuanaParser.RULE_type;
         this.deprecated = null; // Token
         this.name = null; // IdContext
-        this.parameters = null; // Data_parametersContext
+        this.parameters = null; // Type_parametersContext
     }
 
 	id() {
 	    return this.getTypedRuleContext(IdContext,0);
 	};
 
-	data_parameters() {
-	    return this.getTypedRuleContext(Data_parametersContext,0);
+	type_parameters() {
+	    return this.getTypedRuleContext(Type_parametersContext,0);
 	};
 
 	enterRule(listener) {
 	    if(listener instanceof JuanaListener ) {
-	        listener.enterData(this);
+	        listener.enterType(this);
 		}
 	}
 
 	exitRule(listener) {
 	    if(listener instanceof JuanaListener ) {
-	        listener.exitData(this);
+	        listener.exitType(this);
 		}
 	}
 
 	accept(visitor) {
 	    if ( visitor instanceof JuanaVisitor ) {
-	        return visitor.visitData(this);
+	        return visitor.visitType(this);
 	    } else {
 	        return visitor.visitChildren(this);
 	    }
@@ -1158,7 +1158,7 @@ class DataContext extends antlr4.ParserRuleContext {
 
 
 
-class Data_parametersContext extends antlr4.ParserRuleContext {
+class Type_parametersContext extends antlr4.ParserRuleContext {
 
     constructor(parser, parent, invokingState) {
         if(parent===undefined) {
@@ -1169,7 +1169,7 @@ class Data_parametersContext extends antlr4.ParserRuleContext {
         }
         super(parent, invokingState);
         this.parser = parser;
-        this.ruleIndex = JuanaParser.RULE_data_parameters;
+        this.ruleIndex = JuanaParser.RULE_type_parameters;
     }
 
 	parameter = function(i) {
@@ -1185,19 +1185,19 @@ class Data_parametersContext extends antlr4.ParserRuleContext {
 
 	enterRule(listener) {
 	    if(listener instanceof JuanaListener ) {
-	        listener.enterData_parameters(this);
+	        listener.enterType_parameters(this);
 		}
 	}
 
 	exitRule(listener) {
 	    if(listener instanceof JuanaListener ) {
-	        listener.exitData_parameters(this);
+	        listener.exitType_parameters(this);
 		}
 	}
 
 	accept(visitor) {
 	    if ( visitor instanceof JuanaVisitor ) {
-	        return visitor.visitData_parameters(this);
+	        return visitor.visitType_parameters(this);
 	    } else {
 	        return visitor.visitChildren(this);
 	    }
@@ -1498,8 +1498,8 @@ JuanaParser.VariableContext = VariableContext;
 JuanaParser.Variable_valueContext = Variable_valueContext; 
 JuanaParser.ParameterContext = ParameterContext; 
 JuanaParser.Parameter_typeContext = Parameter_typeContext; 
-JuanaParser.DataContext = DataContext; 
-JuanaParser.Data_parametersContext = Data_parametersContext; 
+JuanaParser.TypeContext = TypeContext; 
+JuanaParser.Type_parametersContext = Type_parametersContext; 
 JuanaParser.MethodContext = MethodContext; 
 JuanaParser.Method_parametersContext = Method_parametersContext; 
 JuanaParser.DirectiveContext = DirectiveContext; 
