@@ -58,4 +58,8 @@ rpc.find(name) // find method or type by name
 rpc.findType(name) // find type by name
 rpc.findMethod(name) // find method by name
 rpc.findDirective(name) // find directives by name
+
+rpc.addType(type) // add type to context
+rpc.addMethod(method) // add method to context
+rpc.addDirective(directive) // add directive to context
 ```

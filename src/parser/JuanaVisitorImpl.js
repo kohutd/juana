@@ -40,12 +40,12 @@ class JuanaVisitorImpl extends JuanaVisitor {
     }
 
     visitParameter(ctx) {
-        const name = this.visit(ctx.name);
-        const optional = !!ctx.optional;
-        const type = this.visit(ctx.ptype);
-        const deprecated = !!ctx.deprecated;
+        const name = this.visit(ctx.p_name);
+        const optional = !!ctx.p_optional;
+        const types = this.visit(ctx.p_types);
+        const deprecated = !!ctx.p_deprecated;
 
-        return new ParameterNode(_(ctx), { name, optional, type, deprecated });
+        return new ParameterNode(_(ctx), { name, optional, types, deprecated });
     }
 
     visitType(ctx) {
@@ -54,6 +54,18 @@ class JuanaVisitorImpl extends JuanaVisitor {
         const deprecated = !!ctx.deprecated;
 
         return new TypeNode(_(ctx), { name, parameters, deprecated });
+    }
+
+    visitParameter_type(ctx) {
+        if (ctx.pt_array) {
+            const id = singleNode(this.visitId(ctx.pt_array));
+
+            id.value = `${id.value}[]`;
+
+            return [id];
+        }
+
+        return super.visitParameter_type(ctx);
     }
 
     visitMethod(ctx) {

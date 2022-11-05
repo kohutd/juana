@@ -48,6 +48,12 @@ export default class JuanaVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by JuanaParser#parameter_types.
+	visitParameter_types(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by JuanaParser#parameter_type.
 	visitParameter_type(ctx) {
 	  return this.visitChildren(ctx);
