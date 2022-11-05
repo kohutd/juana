@@ -1,0 +1,16 @@
+{
+  "name": "juana",
+  "version": "0.0.1",
+  "description": "Juana language for JSON-RPC",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "antlr4": "cd ./src/parser && java -jar ../../vendor/antlr-4.11.1-complete.jar -Dlanguage=JavaScript -o antlr4 *.g4 -visitor"
+  },
+  "author": "Davyd Kohut (davyd.kohut@gmail.com)",
+  "license": "MIT",
+  "dependencies": {
+    "antlr4": "^4.11.0"
+  }
+}
