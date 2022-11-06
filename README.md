@@ -43,17 +43,17 @@ console.log(juanaDocument);
 ## API
 
 ```javascript
-rpc.variables // list of top level variables (name, version etc.)
-rpc.types // list of types
-rpc.methods // list of methods
-rpc.directives // list of directives
+jd.variables // list of top level variables (name, version etc.)
+jd.types // list of types
+jd.methods // list of methods
+jd.directives // list of directives
 
-rpc.find(name) // find method or type by name
-rpc.findType(name) // find type by name
-rpc.findMethod(name) // find method by name
-rpc.findDirective(name) // find directives by name
+jd.find(name) // find method or type by name
+jd.findType(name) // find type by name
+jd.findMethod(name) // find method by name
+jd.findDirective(name) // find directives by name
 
-rpc.addType(type) // add type to context
-rpc.addMethod(method) // add method to context
-rpc.addDirective(directive) // add directive to context
+jd.addType(type) // add type to context
+jd.addMethod(method) // add method to context
+jd.addDirective(directive) // add directive to context
 ```
