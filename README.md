@@ -15,7 +15,7 @@ From source:
 ```javascript
 import juana from 'juana';
 
-const rpc = juana`
+const juanaDocument = juana`
 name = "Math API";
 version = "1.0.0";
 
@@ -27,9 +27,7 @@ mul(a: float, b: float): float;
 div(a: float, b: float): float;
 `;
 
-const result = await rpc.call('add', [2, 2]);
-
-console.log(result);
+console.log(juanaDocument);
 ```
 
 By url:
@@ -37,11 +35,9 @@ By url:
 ```javascript
 import juana from 'juana';
 
-const rpc = await juana.byUrl('https://math.juana.dev/v1');
+const juanaDocument = await juana.byUrl('https://math.juana.dev/v1');
 
-const result = await rpc.call('add', [2, 2]);
-
-console.log(result);
+console.log(juanaDocument);
 ```
 
 ## API
@@ -52,8 +48,6 @@ rpc.types // list of types
 rpc.methods // list of methods
 rpc.directives // list of directives
 
-rpc.call(name, parameters) // call a method using default protocol
-rpc.callOver(proto, name, parameters) // call a method over specific protocol
 rpc.find(name) // find method or type by name
 rpc.findType(name) // find type by name
 rpc.findMethod(name) // find method by name

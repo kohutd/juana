@@ -28,8 +28,6 @@ function juana(code) {
         methods,
         directives,
 
-        call,
-        callOver,
         find,
         findType,
         findMethod,
@@ -52,14 +50,6 @@ function juana(code) {
         } else if (node instanceof VariableNode) {
             resolveVariable(context, variables, node);
         }
-    }
-
-    function call(name, parameters = []) {
-        //
-    }
-
-    function callOver(proto, name, parameters = []) {
-        //
     }
 
     function find(name) {
