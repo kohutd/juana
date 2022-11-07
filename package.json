@@ -1,7 +1,7 @@
 {
-  "name": "juana-dev",
-  "version": "0.0.7",
-  "description": "Juana language for JSON-RPC",
+  "name": "juana",
+  "version": "0.0.8",
+  "description": "JSON-RPC description language.",
   "main": "src/main.js",
   "type": "module",
   "scripts": {

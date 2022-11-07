@@ -31,7 +31,7 @@ function juana(code) {
         find,
         findType,
         findMethod,
-        findDirective,
+        findDirectives,
 
         addType,
         addMethod,
@@ -64,7 +64,7 @@ function juana(code) {
         return methods.find((m) => m.name === name);
     }
 
-    function findDirective(name) {
+    function findDirectives(name) {
         return directives.filter((d) => d.name === name);
     }
 
