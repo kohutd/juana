@@ -19,6 +19,8 @@ const juanaDocument = juana`
 name = "Math API";
 version = "1.0.0";
 
+http.servers.default.url = "https://math.juana.dev/v1";
+
 add(a: float, b: float): float;
 sub(a: float, b: float): float;
 mul(a: float, b: float): float;
