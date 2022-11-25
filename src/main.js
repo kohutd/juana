@@ -26,4 +26,9 @@ juana.byUrl = (url) => fetch(url)
     .then((r) => r.text())
     .then((code) => juana(code));
 
+
+export * from "./elements.js";
+export * from "./types.js";
+export * from "./context.js";
+
 export default juana;
