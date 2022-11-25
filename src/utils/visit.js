@@ -10,7 +10,7 @@ export function singleNode(node) {
     return node;
 }
 
-export function manyNodes(node) {
+export function flatNodes(node) {
     if (Array.isArray(node)) {
         node = node.flat(Infinity).filter((n) => !!n);
 
@@ -18,4 +18,8 @@ export function manyNodes(node) {
     }
 
     return [node];
+}
+
+export function last(items) {
+    return items[items.length - 1];
 }

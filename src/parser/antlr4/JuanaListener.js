@@ -14,6 +14,15 @@ export default class JuanaListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by JuanaParser#element.
+	enterElement(ctx) {
+	}
+
+	// Exit a parse tree produced by JuanaParser#element.
+	exitElement(ctx) {
+	}
+
+
 	// Enter a parse tree produced by JuanaParser#id.
 	enterId(ctx) {
 	}
@@ -41,21 +50,21 @@ export default class JuanaListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by JuanaParser#value.
+	enterValue(ctx) {
+	}
+
+	// Exit a parse tree produced by JuanaParser#value.
+	exitValue(ctx) {
+	}
+
+
 	// Enter a parse tree produced by JuanaParser#variable.
 	enterVariable(ctx) {
 	}
 
 	// Exit a parse tree produced by JuanaParser#variable.
 	exitVariable(ctx) {
-	}
-
-
-	// Enter a parse tree produced by JuanaParser#variable_value.
-	enterVariable_value(ctx) {
-	}
-
-	// Exit a parse tree produced by JuanaParser#variable_value.
-	exitVariable_value(ctx) {
 	}
 
 
@@ -131,12 +140,12 @@ export default class JuanaListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by JuanaParser#directive_parameters.
-	enterDirective_parameters(ctx) {
+	// Enter a parse tree produced by JuanaParser#directive_values.
+	enterDirective_values(ctx) {
 	}
 
-	// Exit a parse tree produced by JuanaParser#directive_parameters.
-	exitDirective_parameters(ctx) {
+	// Exit a parse tree produced by JuanaParser#directive_values.
+	exitDirective_values(ctx) {
 	}
 
 

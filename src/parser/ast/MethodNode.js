@@ -2,19 +2,19 @@ import ASTNode from "./ASTNode.js";
 
 class MethodNode extends ASTNode {
     /**
-     * @param context
+     * @param {ParserContext} parserContext
      * @param {string} name
      * @param {ParameterNode[]} parameters
-     * @param {TypeNode[]} result
-     * @param {boolean} deprecated
+     * @param {IdNode[]} result
+     * @param {string} doc
      */
-    constructor(context, { name, parameters, result, deprecated }) {
-        super(context);
+    constructor(parserContext, { name, parameters, result, doc }) {
+        super(parserContext);
 
         this.name = name;
         this.parameters = parameters;
         this.result = result;
-        this.deprecated = deprecated;
+        this.doc = doc;
     }
 }
 

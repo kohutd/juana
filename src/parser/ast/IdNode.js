@@ -2,13 +2,13 @@ import ASTNode from "./ASTNode.js";
 
 class IdNode extends ASTNode {
     /**
-     * @param context
-     * @param {string} value
+     * @param {ParserContext} parserContext
+     * @param {string} name
      */
-    constructor(context, { value }) {
-        super(context);
+    constructor(parserContext, { name }) {
+        super(parserContext);
 
-        this.value = value;
+        this.name = name;
     }
 }
 

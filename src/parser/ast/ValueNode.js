@@ -1,9 +1,9 @@
 import ASTNode from "./ASTNode.js";
 
-class NumberNode extends ASTNode {
+class ValueNode extends ASTNode {
     /**
      * @param {ParserContext} parserContext
-     * @param {number} value
+     * @param {StringNode|NumberNode|IdNode} value
      */
     constructor(parserContext, { value }) {
         super(parserContext);
@@ -12,4 +12,4 @@ class NumberNode extends ASTNode {
     }
 }
 
-export default NumberNode;
+export default ValueNode;

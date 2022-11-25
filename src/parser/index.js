@@ -2,7 +2,7 @@ import antlr4 from "antlr4";
 import JuanaLexer from "./antlr4/JuanaLexer.js";
 import JuanaParser from "./antlr4/JuanaParser.js";
 import { title } from "../utils/text.js";
-import { manyNodes } from "../utils/visit.js";
+import { flatNodes } from "../utils/visit.js";
 import JuanaVisitorImpl from "./JuanaVisitorImpl.js";
 
 class ErrorListener extends antlr4.error.ErrorListener {
@@ -26,10 +26,10 @@ export function parse(code, options = {}) {
 
     const tree = parser[options.start]();
 
-    const visitor = new JuanaVisitorImpl();
+    const visitor = new JuanaVisitorImpl(tokens);
 
     let ast = visitor[`visit${title(options.start)}`](tree);
 
-    return manyNodes(ast);
+    return flatNodes(ast);
 
 }

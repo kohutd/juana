@@ -1,16 +1,18 @@
 import JuanaVisitor from "./antlr4/JuanaVisitor.js";
 import ParameterNode from "./ast/ParameterNode.js";
 import TypeNode from "./ast/TypeNode.js";
-import { manyNodes, singleNode } from "../utils/visit.js";
+import { flatNodes, last } from "../utils/visit.js";
 import MethodNode from "./ast/MethodNode.js";
 import VariableNode from "./ast/VariableNode.js";
 import StringNode from "./ast/StringNode.js";
 import NumberNode from "./ast/NumberNode.js";
-import IdNode from "./ast/IdNode.js";
 import DirectiveNode from "./ast/DirectiveNode.js";
+import ParserContext from "./ParserContext.js";
+import IdNode from "./ast/IdNode.js";
+import JuanaLexer from "./antlr4/JuanaLexer.js";
 
 function _(ctx) {
-    return {
+    return new ParserContext({
         start: {
             line: ctx.start.line,
             column: ctx.start.column,
@@ -19,75 +21,32 @@ function _(ctx) {
             line: ctx.stop.line,
             column: ctx.stop.column,
         },
-    };
+    });
 }
 
 class JuanaVisitorImpl extends JuanaVisitor {
+    /**
+     * @param {antlr4.CommonTokenStream} tokens
+     */
+    constructor(tokens) {
+        super();
+        this.tokens = tokens;
+    }
+
     visit(ctx) {
         const visited = super.visit(ctx);
 
         if (Array.isArray(visited)) {
-            return manyNodes(visited);
+            return flatNodes(visited);
         }
 
         return visited;
     }
 
     visitId(ctx) {
-        const value = ctx.getText();
+        const name = ctx.getText();
 
-        return new IdNode(_(ctx), { value });
-    }
-
-    visitParameter(ctx) {
-        const name = this.visit(ctx.p_name);
-        const optional = !!ctx.p_optional;
-        const types = this.visit(ctx.p_types);
-        const deprecated = !!ctx.p_deprecated;
-
-        return new ParameterNode(_(ctx), { name, optional, types, deprecated });
-    }
-
-    visitType(ctx) {
-        const name = this.visit(ctx.name);
-        const parameters = ctx.parameters ? this.visit(ctx.parameters) : [];
-        const deprecated = !!ctx.deprecated;
-
-        return new TypeNode(_(ctx), { name, parameters, deprecated });
-    }
-
-    visitParameter_type(ctx) {
-        if (ctx.pt_array) {
-            const id = singleNode(this.visitId(ctx.pt_array));
-
-            id.value = `${id.value}[]`;
-
-            return [id];
-        }
-
-        return super.visitParameter_type(ctx);
-    }
-
-    visitMethod(ctx) {
-        const name = this.visit(ctx.name);
-        const parameters = ctx.parameters ? this.visit(ctx.parameters) : [];
-        const result = ctx.result ? this.visit(ctx.result) : null;
-        const deprecated = !!ctx.deprecated;
-
-        return new MethodNode(_(ctx), { name, parameters, result, deprecated });
-    }
-
-    visitVariable(ctx) {
-        const name = this.visit(ctx.name);
-        const value = this.visit(ctx.value);
-
-        return new VariableNode(_(ctx), { name, value });
-    }
-
-    visitVariable_value(ctx) {
-        const value = super.visitVariable_value(ctx);
-
-        return singleNode(value);
+        return new IdNode(_(ctx), { name });
     }
 
     visitString(ctx) {
@@ -104,12 +63,73 @@ class JuanaVisitorImpl extends JuanaVisitor {
         return new NumberNode(_(ctx), { value });
     }
 
-    visitDirective(ctx) {
-        const name = this.visit(ctx.name);
-        const parameters = ctx.parameters ? this.visit(ctx.parameters) : [];
-        const body = ctx.body ? this.visit(ctx.body) : [];
+    visitValue(ctx) {
+        const value = super.visitValue(ctx);
 
-        return new DirectiveNode(_(ctx), { name, parameters, body });
+        return value[0];
+    }
+
+    visitVariable(ctx) {
+        const id = this.visitId(ctx.v_name);
+        const value = this.visit(ctx.v_value);
+        const doc = this.getDocComment(ctx);
+
+        return new VariableNode(_(ctx), { name: id.name, value, doc });
+    }
+
+    visitParameter(ctx) {
+        const id = this.visitId(ctx.p_name);
+        const optional = !!ctx.p_optional;
+        const types = this.visit(ctx.p_types);
+        const doc = this.getDocComment(ctx);
+
+        return new ParameterNode(_(ctx), { name: id.name, optional, types, doc });
+    }
+
+    visitParameter_type(ctx) {
+        if (ctx.pt_array) {
+            const id = this.visitId(ctx.pt_array);
+
+            id.name = `${id.name}[]`;
+
+            return [id];
+        }
+
+        return super.visitParameter_type(ctx);
+    }
+
+    visitType(ctx) {
+        const id = this.visitId(ctx.t_name);
+        const parameters = ctx.t_parameters ? this.visit(ctx.t_parameters) : [];
+        const doc = this.getDocComment(ctx);
+
+        return new TypeNode(_(ctx), { name: id.name, parameters, doc });
+    }
+
+    visitMethod(ctx) {
+        const id = this.visitId(ctx.m_name);
+        const parameters = ctx.m_parameters ? this.visit(ctx.m_parameters) : [];
+        const result = ctx.m_result ? this.visit(ctx.m_result) : [];
+        const doc = this.getDocComment(ctx);
+
+        return new MethodNode(_(ctx), { name: id.name, parameters, result, doc });
+    }
+
+    visitDirective(ctx) {
+        const id = this.visitId(ctx.d_name);
+        const values = ctx.d_values ? this.visit(ctx.d_values) : [];
+        const body = ctx.d_body ? this.visit(ctx.d_body) : [];
+        const doc = this.getDocComment(ctx);
+
+        return new DirectiveNode(_(ctx), { name: id.name, values, body, doc });
+    }
+
+    getDocComment(ctx) {
+        const hiddenTokens = this.tokens.getHiddenTokensToLeft(ctx.start.tokenIndex, 1) || [];
+        const docTokens = hiddenTokens.filter((token) => token.type === JuanaLexer.COMMENT);
+        const docToken = last(docTokens);
+
+        return docToken ? docToken.text : '';
     }
 }
 

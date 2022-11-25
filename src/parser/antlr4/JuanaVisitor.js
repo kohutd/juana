@@ -12,6 +12,12 @@ export default class JuanaVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by JuanaParser#element.
+	visitElement(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by JuanaParser#id.
 	visitId(ctx) {
 	  return this.visitChildren(ctx);
@@ -30,14 +36,14 @@ export default class JuanaVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
-	// Visit a parse tree produced by JuanaParser#variable.
-	visitVariable(ctx) {
+	// Visit a parse tree produced by JuanaParser#value.
+	visitValue(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
-	// Visit a parse tree produced by JuanaParser#variable_value.
-	visitVariable_value(ctx) {
+	// Visit a parse tree produced by JuanaParser#variable.
+	visitVariable(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
@@ -90,8 +96,8 @@ export default class JuanaVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
-	// Visit a parse tree produced by JuanaParser#directive_parameters.
-	visitDirective_parameters(ctx) {
+	// Visit a parse tree produced by JuanaParser#directive_values.
+	visitDirective_values(ctx) {
 	  return this.visitChildren(ctx);
 	}
 

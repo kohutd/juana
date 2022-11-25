@@ -2,17 +2,16 @@ import ASTNode from "./ASTNode.js";
 
 class TypeNode extends ASTNode {
     /**
-     * @param context
-     * @param {IdNode} name
+     * @param {ParserContext} parserContext
+     * @param {string} name
      * @param {ParameterNode[]} parameters
-     * @param {boolean} deprecated
      */
-    constructor(context, { name, parameters, deprecated }) {
-        super(context);
+    constructor(parserContext, { name, parameters, doc }) {
+        super(parserContext);
 
         this.name = name;
         this.parameters = parameters;
-        this.deprecated = deprecated;
+        this.doc = doc;
     }
 }
 

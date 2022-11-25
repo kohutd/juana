@@ -2,16 +2,16 @@ import ASTNode from "./ASTNode.js";
 
 class DirectiveNode extends ASTNode {
     /**
-     * @param context
+     * @param {ParserContext} parserContext
      * @param {string} name
-     * @param {IdNode[]} parameters
-     * @param {VariableNode[]} body
+     * @param {ValueNode[]} values
+     * @param {VariableNode[]|TypeNode[]|MethodNode[]|DirectiveNode[]} body
      */
-    constructor(context, { name, parameters, body }) {
-        super(context);
+    constructor(parserContext, { name, values, body }) {
+        super(parserContext);
 
         this.name = name;
-        this.parameters = parameters;
+        this.values = values;
         this.body = body;
     }
 }

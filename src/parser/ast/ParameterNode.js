@@ -2,19 +2,17 @@ import ASTNode from "./ASTNode.js";
 
 class ParameterNode extends ASTNode {
     /**
-     * @param context
-     * @param {IdNode} name
-     * @param {boolean} optional
+     * @param {ParserContext} parserContext
+     * @param {string} name
      * @param {TypeNode[]} types
-     * @param {boolean} deprecated
+     * @param {boolean} optional
      */
-    constructor(context, { name, optional, types, deprecated }) {
-        super(context);
+    constructor(parserContext, { name, types, optional }) {
+        super(parserContext);
 
         this.name = name;
-        this.optional = optional;
         this.types = types;
-        this.deprecated = deprecated;
+        this.optional = optional;
     }
 }
 

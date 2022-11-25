@@ -1,6 +1,9 @@
 class ASTNode {
-    constructor(context) {
-        this.context = context;
+    /**
+     * @param {ParserContext} parserContext
+     */
+    constructor(parserContext) {
+        this.parserContext = parserContext;
     }
 }
 

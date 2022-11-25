@@ -2,11 +2,11 @@ import ASTNode from "./ASTNode.js";
 
 class StringNode extends ASTNode {
     /**
-     * @param context
+     * @param {ParserContext} parserContext
      * @param {string} value
      */
-    constructor(context, { value }) {
-        super(context);
+    constructor(parserContext, { value }) {
+        super(parserContext);
 
         this.value = value;
     }

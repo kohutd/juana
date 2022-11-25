@@ -19,10 +19,6 @@ const juanaDocument = juana`
 name = "Math API";
 version = "1.0.0";
 
-@http "https://math.juana.dev/v1";
-
-float float64;
-
 add(a: float, b: float): float;
 sub(a: float, b: float): float;
 mul(a: float, b: float): float;
@@ -48,16 +44,17 @@ console.log(juanaDocument);
 jd.variables // list of top level variables (name, version etc.)
 jd.types // list of types
 jd.methods // list of methods
-jd.directives // list of directives
+jd.handlers // list of directive handlers
 
-jd.find(name) // find method or type by name
-jd.findType(name) // find type by name
-jd.findMethod(name) // find method by name
-jd.findDirectives(name) // find directives by name
+jd.getVariable(name) // get variable by name
+jd.getType(name) // get type by name
+jd.getMethod(name) // get method by name
+jd.getHandler(name) // get directive handler by name
 
-jd.addType(type) // add type to context
-jd.addMethod(method) // add method to context
-jd.addDirective(directive) // add directive to context
+jd.putVariable(type) // put variable to context
+jd.putType(type) // put type to context
+jd.putMethod(method) // put method to context
+jd.putHandler(handler) // put directive handler to context
 ```
 
 ## Syntax
@@ -86,14 +83,8 @@ typeName typeName;
 // method
 methodName(parameterName: typeName, parameter2Name: typeName): typeName;
 
-// directive declaration using predefined directive "directive"
-@directive directiveName directiveArgumentName directiveArgument2Name {
-    variableName = value;
-    variable2Name = value;
-}
-
-// directive utilization
-@directiveName directiveArgument directiveArgument2 {
+// directive
+@directiveName value {
     variableName = value;
     variable2Name = value;
 }
